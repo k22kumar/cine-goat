@@ -1,0 +1,64 @@
+@import './setup.scss';
+@import './variable';
+
+html {
+  font-size: 62.5%;
+}
+
+ul {
+  list-style: none;
+}
+
+input, button { border:none; }
+
+button {
+  background: #1E88E5;
+  color: white;
+  white-space: nowrap;
+  text-decoration: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.App {
+  text-align: center;
+}
+
+.addOptionContainer {
+  display: flex;
+
+}
+
+.movieOptionContainer {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  .imgAndVotes {
+    display: flex;
+    flex-direction: column;
+      .movieImg {
+        width: 150px;
+      }
+  }
+  .likeAndDislike {
+    display: flex;
+    .like, .dislike {
+      flex: 1 0 20px;
+      height: 30px;
+    }
+    .like:hover,.like:focus {
+      background-color: green;
+    }
+
+    .dislike:hover, .dislike:focus {
+      background-color: red;
+    }
+  }
+
+}
+

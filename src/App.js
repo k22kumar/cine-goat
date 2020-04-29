@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.scss";
+import AddOption from "./AddOption";
+import MovieOption from "./MovieOption";
+import firebase from "./firebase";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    //put all the movie options in an array and map over them
+    super();
+    this.state = {
+      movieOptions: [],
+      userInput: "enter a movie",
+    };
+  }
+
+  componentDidMount() {
+    //set up listener to database
+
+    const dbRef = firebase.database().ref();
+    dbRef.on("value", (snapshot) => {
+      const data = snapshot.val();
+      console.log(data);
+      const movieArray = [];
+      for (let key in data) {
+      }
+    });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <AddOption />
+        <MovieOption />
+      </div>
+    );
+  }
 }
 
 export default App;
