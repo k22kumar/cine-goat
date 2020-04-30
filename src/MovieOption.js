@@ -14,18 +14,17 @@ class MovieOption extends Component {
   }
 
   deferredLike = (e, key) => {
-    console.log(key);
     this.props.voteHandler(e, key, 1);
   }
 
-  deferredDislike = (e) => {
-    this.props.voteHandler(e, this.props.key, -1);
+  deferredDislike = (e, key) => {
+    this.props.voteHandler(e, key, -1);
   }
 
 
     render() {
       // you can create some logic here like adding a variable and then instead of putting className put a variable
-      console.log("props", this.props);
+      // console.log("props", this.props);
         return (
           <ul className="movieOptionContainer">
             <li className="votes">
@@ -37,10 +36,10 @@ class MovieOption extends Component {
             <li className="likeAndDislike">
             {/* put a turnerary that decides if it has been clicked then unclick dislike inside the button itself since it is JSX*/}
               <button className="like"
-                 onClick={(e) => this.deferredLike(e, this.props.key)}>
+                 onClick={(e) => this.deferredLike(e, this.props.movieID)}>
                 <i className="fas fa-thumbs-up"></i>
               </button>
-              <button className="dislike" onClick={(e) => this.deferredDislike(e)}>
+              <button className="dislike" onClick={(e) => this.deferredDislike(e, this.props.movieID)}>
                 <i className="fas fa-thumbs-down"></i>
               </button>
             </li>
