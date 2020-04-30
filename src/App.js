@@ -106,9 +106,9 @@ class App extends Component {
         <AddOption addMovieHandler={this.addMovieHandler}/>
         <ul className="movieGallery">
           {
-            this.state.movieOptions.map((movie) => {
+            this.state.movieOptions.map((movie, i) => {
               const {movieID, movieTitle, votes} = movie;
-              return <MovieOption movieID={movieID} movieTitle={movieTitle} votes={votes} voteHandler={this.voteHandler}/>;
+              return <MovieOption key={i} movieID={movieID} movieTitle={movieTitle} votes={votes} voteHandler={this.voteHandler}/>;
             })
           }
         </ul>
