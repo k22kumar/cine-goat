@@ -24,7 +24,7 @@ class MovieOption extends Component {
 
     render() {
       // you can create some logic here like adding a variable and then instead of putting className put a variable
-      console.log("props", this.props);
+      // console.log("props", this.props);
         return (
           <ul className="movieOptionContainer">
             <li className="votes">

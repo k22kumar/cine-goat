@@ -3,6 +3,7 @@ import "./App.scss";
 import AddOption from "./AddOption";
 import MovieOption from "./MovieOption";
 import firebase from "./firebase";
+import axios from "axios";
 
 class App extends Component {
   constructor() {
@@ -39,11 +40,37 @@ class App extends Component {
 
   // helper methods
   addMovieHandler = (event, movieTitle) => {
+    
+
+
     const dbRef = firebase.database().ref();
     event.preventDefault();
     if (this.state.userInput !== "") {
-      // dynamically add variable names that equal the name of the movie
-      // eval(`const ${movieTitle} = { vote: 0, image: ""} ;`)
+      const apiKey = `ffb95a5b116cb8ae246c7c6f51c94ed6`;
+      
+
+      
+      // make an api call to themovieDatabbase
+      const movieDBURL = `https://api.themoviedb.org/3/search/movie?`;
+
+      // axios.get(`${movieDBURL}api_key=${apiKey}query=${movieTitle}`).then((response) => {
+      //   console.log( response);
+      // });
+
+      axios({
+        url: movieDBURL,
+        method: `GET`,
+        responseType: `json`,
+        params: {
+          api_key: apiKey,
+          query: movieTitle
+        }
+      }).then(
+        (response) => {
+          console.log(response.data.results[0]);
+        }
+      )
+
       const newMovie = {
         title: movieTitle,
         votes: 1,
@@ -77,8 +104,8 @@ class App extends Component {
         <ul className="movieGallery">
           {
             this.state.movieOptions.map((movie) => {
-              const {movieID} = movie;
-              return <MovieOption movieID={movieID} movieTitle={movie.title} votes={movie.votes} voteHandler={this.voteHandler}/>;
+              const {movieID, movieTitle, votes} = movie;
+              return <MovieOption movieID={movieID} movieTitle={movieTitle} votes={votes} voteHandler={this.voteHandler}/>;
             })
           }
         </ul>
