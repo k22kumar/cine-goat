@@ -60,8 +60,13 @@ class App extends Component {
   voteHandler = (event, key, voteToAdd) => {
     // go to key in database respreseinting the movie
     // update the vote b vote to add
-    const dbRef = firebase.database().ref();
-   console.log(dbRef.child("/movie-vote-e2d81/" + key + "/title/"));
+    const dbRef = firebase.database().ref(key);
+
+    console.log(dbRef)
+    dbRef.update({
+      votes: 4
+    });
+   console.log("key: " + key);
   }
 
   render() {
@@ -70,8 +75,10 @@ class App extends Component {
         <AddOption addMovieHandler={this.addMovieHandler}/>
         <ul className="movieGallery">
           {
-            this.state.movieOptions.map((movie, i) => {
-              return <MovieOption key={movie.movieID} movieTitle={movie.title} votes={movie.votes} voteHandler={this.voteHandler}/>;
+            this.state.movieOptions.map((movie) => {
+              const {movieID} = movie;
+            console.log("when adding movieID is:" , movieID);
+              return <MovieOption key={movieID} movieTitle={movie.title} votes={movie.votes} voteHandler={this.voteHandler}/>;
             })
           }
         </ul>
