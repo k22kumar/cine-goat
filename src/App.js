@@ -16,23 +16,21 @@ class App extends Component {
 
   componentDidMount() {
     //set up listener to database
-
     const dbRef = firebase.database().ref();
     dbRef.on("value", (snapshot) => {
       const data = snapshot.val();
-      console.log("the data: ")
-      console.log(data);
       const movieArray = [];
       for (let key in data) {
         movieArray.push(
           {
             movieTitle: data[key].title,
-            movieId: key,
+            movieID: key,
             image: data[key].image,
             votes: data[key].votes
           }
         )
       }
+      console.log(movieArray);
       // update the movie state array
       this.setState({
         movieOptions: movieArray
@@ -42,9 +40,9 @@ class App extends Component {
 
   // helper methods
   addMovieHandler = (event, movieTitle) => {
+    const dbRef = firebase.database().ref();
     event.preventDefault();
     if (this.state.userInput !== "") {
-      const dbRef = firebase.database().ref();
       // dynamically add variable names that equal the name of the movie
       // eval(`const ${movieTitle} = { vote: 0, image: ""} ;`)
       const newMovie = {
@@ -59,6 +57,18 @@ class App extends Component {
     }
   }
 
+  voteHandler = (event, key, voteToAdd) => {
+    // go to key in database respreseinting the movie
+    // update the vote b vote to add
+    const dbRef = firebase.database().ref(key);
+
+    console.log(dbRef)
+    dbRef.update({
+      votes: 4
+    });
+   console.log("key: " + key);
+  }
+
   render() {
     return (
       <div className="App">
@@ -66,7 +76,9 @@ class App extends Component {
         <ul className="movieGallery">
           {
             this.state.movieOptions.map((movie) => {
-              return <MovieOption key={movie.id} movieTitle={movie.title} votes={movie.votes}/>;
+              const {movieID} = movie;
+            console.log("when adding movieID is:" , movieID);
+              return <MovieOption key={movieID} movieTitle={movie.title} votes={movie.votes} voteHandler={this.voteHandler}/>;
             })
           }
         </ul>

@@ -27,10 +27,16 @@ img {
 
 .App {
   text-align: center;
+  .movieGallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 
 .addOptionContainer {
   display: flex;
+  justify-content: center;
 
 }
 

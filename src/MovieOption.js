@@ -1,26 +1,31 @@
 import React, { Component } from "react";
 import tempImg from "./assets/temp.jpg";
+import firebase from "./firebase";
 
 class MovieOption extends Component {
 
   constructor() {
     super();
+
     this.state = {
-      movieId: "",
-      movieTitle: "",
-      votes: "",
-      image: ""
+      likePressed: false,
+      dislikePressed: false
     };
   }
 
-
-
-  vote = (voteToAdd) => {
-      const dbRef = firebase.database().ref();
-      import firebase from "./firebase";
+  deferredLike = (e, key) => {
+    console.log(key);
+    this.props.voteHandler(e, key, 1);
   }
 
+  deferredDislike = (e) => {
+    this.props.voteHandler(e, this.props.key, -1);
+  }
+
+
     render() {
+      // you can create some logic here like adding a variable and then instead of putting className put a variable
+      console.log("props", this.props);
         return (
           <ul className="movieOptionContainer">
             <li className="votes">
@@ -30,10 +35,12 @@ class MovieOption extends Component {
               <img src={tempImg} alt="a sample movie image" />
             </li>
             <li className="likeAndDislike">
-              <button className="like" onClick={this.vote(1)}>
+            {/* put a turnerary that decides if it has been clicked then unclick dislike inside the button itself since it is JSX*/}
+              <button className="like"
+                 onClick={(e) => this.deferredLike(e, this.props.key)}>
                 <i className="fas fa-thumbs-up"></i>
               </button>
-              <button className="dislike" onClick={this.vote(-1)}>
+              <button className="dislike" onClick={(e) => this.deferredDislike(e)}>
                 <i className="fas fa-thumbs-down"></i>
               </button>
             </li>
