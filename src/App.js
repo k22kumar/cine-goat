@@ -23,10 +23,20 @@ class App extends Component {
       console.log("the data: ")
       console.log(data);
       const movieArray = [];
-      console.log("keys");
-      for (let movie in data) {
-        console.log(movie);
+      for (let key in data) {
+        movieArray.push(
+          {
+            movieTitle: data[key].title,
+            movieId: key,
+            image: data[key].image,
+            votes: data[key].votes
+          }
+        )
       }
+      // update the movie state array
+      this.setState({
+        movieOptions: movieArray
+      })
     });
   }
 
@@ -53,7 +63,14 @@ class App extends Component {
     return (
       <div className="App">
         <AddOption addMovieHandler={this.addMovieHandler}/>
-        <MovieOption />
+        <ul className="movieGallery">
+          {
+            this.state.movieOptions.map((movie) => {
+              return <MovieOption key={movie.id} movieTitle={movie.title} votes={movie.votes}/>;
+            })
+          }
+        </ul>
+        
       </div>
     );
   }
