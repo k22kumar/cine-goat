@@ -18,6 +18,7 @@ class AddOption extends Component {
 
   // defered function to pass movie titles from input to main App
   deferedAddMovie = (e) => {
+    console.log("userInputfromaddOption", this.state.userInput);
     this.props.addMovieHandler(e, this.state.userInput)
   }
 

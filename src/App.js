@@ -39,13 +39,13 @@ class App extends Component {
   }
 
   // helper methods
-  addMovieHandler = (event, movieTitle) => {
+  addMovieHandler = (event, userInput) => {
     
-
-
+    
     const dbRef = firebase.database().ref();
     event.preventDefault();
-    if (this.state.userInput !== "") {
+    if (userInput !== "") {
+      console.log("clicked for a movie");
       const apiKey = `ffb95a5b116cb8ae246c7c6f51c94ed6`;
       
 
@@ -63,23 +63,26 @@ class App extends Component {
         responseType: `json`,
         params: {
           api_key: apiKey,
-          query: movieTitle
+          query: userInput
         }
       }).then(
         (response) => {
           console.log(response.data.results[0]);
+
+
+          const newMovie = {
+            title: userInput,
+            votes: 1,
+            image: "",
+          };
+          dbRef.push(newMovie);
+          this.setState({
+            userInput: ""
+          });
         }
       )
 
-      const newMovie = {
-        title: movieTitle,
-        votes: 1,
-        image: ""
-      }
-      dbRef.push(newMovie);
-      this.setState({
-        userInput: "",
-      });
+      
     }
   }
 
