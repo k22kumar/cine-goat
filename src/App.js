@@ -30,7 +30,6 @@ class App extends Component {
           }
         )
       }
-      console.log(movieArray);
       // update the movie state array
       this.setState({
         movieOptions: movieArray
@@ -60,14 +59,16 @@ class App extends Component {
   voteHandler = (event, key, voteToAdd) => {
     // go to key in database respreseinting the movie
     // update the vote b vote to add
-    const dbRef = firebase.database().ref(key);
+    const dbRef = firebase.database().ref(key+"/votes");
 
-    console.log(dbRef)
-    dbRef.update({
-      votes: 4
+    const newVotes = dbRef.votes;
+
+    dbRef.transaction(function(currentVotes) {
+      return currentVotes + voteToAdd;
     });
-   console.log("key: " + key);
   }
+
+
 
   render() {
     return (
@@ -77,8 +78,7 @@ class App extends Component {
           {
             this.state.movieOptions.map((movie) => {
               const {movieID} = movie;
-            console.log("when adding movieID is:" , movieID);
-              return <MovieOption key={movieID} movieTitle={movie.title} votes={movie.votes} voteHandler={this.voteHandler}/>;
+              return <MovieOption movieID={movieID} movieTitle={movie.title} votes={movie.votes} voteHandler={this.voteHandler}/>;
             })
           }
         </ul>
