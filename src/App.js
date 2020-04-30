@@ -20,17 +20,39 @@ class App extends Component {
     const dbRef = firebase.database().ref();
     dbRef.on("value", (snapshot) => {
       const data = snapshot.val();
+      console.log("the data: ")
       console.log(data);
       const movieArray = [];
-      for (let key in data) {
+      console.log("keys");
+      for (let movie in data) {
+        console.log(movie);
       }
     });
+  }
+
+  // helper methods
+  addMovieHandler = (event, movieTitle) => {
+    event.preventDefault();
+    if (this.state.userInput !== "") {
+      const dbRef = firebase.database().ref();
+      // dynamically add variable names that equal the name of the movie
+      // eval(`const ${movieTitle} = { vote: 0, image: ""} ;`)
+      const newMovie = {
+        title: movieTitle,
+        votes: 1,
+        image: ""
+      }
+      dbRef.push(newMovie);
+      this.setState({
+        userInput: "",
+      });
+    }
   }
 
   render() {
     return (
       <div className="App">
-        <AddOption />
+        <AddOption addMovieHandler={this.addMovieHandler}/>
         <MovieOption />
       </div>
     );
