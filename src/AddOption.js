@@ -17,10 +17,10 @@ class AddOption extends Component {
   };
 
   // defered function to pass movie titles from input to main App
-  deferedAddMovie = (e) => {
-    console.log("userInputfromaddOption", this.state.userInput);
-    this.props.addMovieHandler(e, this.state.userInput)
-  }
+  deferedAddMovie = (e) => this.props.addMovieHandler(e, this.state.userInput);
+
+  //defered function to show the window, it takes a boolean value to update the state in App
+  deferedShowResults = (e, boolValue) => {this.props.showResultsHandler(boolValue)};
 
   render() {
     return (
@@ -30,6 +30,7 @@ class AddOption extends Component {
           <input
             type="text"
             name="movieOption"
+            onFocus={(e) => this.deferedShowResults(e, true)}
             onChange={this.handleUserInput}
           />
         </li>
