@@ -52,10 +52,8 @@ class App extends Component {
       
       // make an api call to themovieDatabbase
       const movieDBURL = `https://api.themoviedb.org/3/search/movie?`;
+      const baseImageURL = `https://image.tmdb.org/t/p/w500`;
 
-      // axios.get(`${movieDBURL}api_key=${apiKey}query=${movieTitle}`).then((response) => {
-      //   console.log( response);
-      // });
 
       axios({
         url: movieDBURL,
@@ -68,12 +66,14 @@ class App extends Component {
       }).then(
         (response) => {
           console.log(response.data.results[0]);
-
-
+          console.log()
+          response.data.results.length > 0 ?
+          
+          const movieImg = `${baseImageURL}${response.data.results[0].poster_path}`;
           const newMovie = {
             title: userInput,
             votes: 1,
-            image: "",
+            image: movieImg,
           };
           dbRef.push(newMovie);
           this.setState({
@@ -107,8 +107,8 @@ class App extends Component {
         <ul className="movieGallery">
           {
             this.state.movieOptions.map((movie, i) => {
-              const {movieID, movieTitle, votes} = movie;
-              return <MovieOption key={i} movieID={movieID} movieTitle={movieTitle} votes={votes} voteHandler={this.voteHandler}/>;
+              const {movieID, movieTitle, votes, image} = movie;
+              return <MovieOption key={i} movieID={movieID} movieTitle={movieTitle} image={image} votes={votes} voteHandler={this.voteHandler}/>;
             })
           }
         </ul>
