@@ -4,6 +4,7 @@ import AddOption from "./AddOption";
 import MovieOption from "./MovieOption";
 import firebase from "./firebase";
 import axios from "axios";
+import ResultScreen from "./ResultScreen";
 
 class App extends Component {
   constructor() {
@@ -12,6 +13,7 @@ class App extends Component {
     this.state = {
       movieOptions: [],
       userInput: "enter a movie",
+      showResults: false
     };
   }
 
@@ -39,23 +41,20 @@ class App extends Component {
   }
 
   // helper methods
-  addMovieHandler = (event, movieTitle) => {
+  addMovieHandler = (event, userInput) => {
     
-
-
+    
     const dbRef = firebase.database().ref();
     event.preventDefault();
-    if (this.state.userInput !== "") {
+    if (userInput !== "") {
+      console.log("clicked for a movie");
       const apiKey = `ffb95a5b116cb8ae246c7c6f51c94ed6`;
-      
-
       
       // make an api call to themovieDatabbase
       const movieDBURL = `https://api.themoviedb.org/3/search/movie?`;
+      //endpoint to movie poster path
+      const baseImageURL = `https://image.tmdb.org/t/p/w500`;
 
-      // axios.get(`${movieDBURL}api_key=${apiKey}query=${movieTitle}`).then((response) => {
-      //   console.log( response);
-      // });
 
       axios({
         url: movieDBURL,
@@ -63,25 +62,33 @@ class App extends Component {
         responseType: `json`,
         params: {
           api_key: apiKey,
-          query: movieTitle
+          query: userInput
         }
       }).then(
         (response) => {
           console.log(response.data.results[0]);
+          
+
+
+          const movieImg = `${baseImageURL}${response.data.results[0].poster_path}`;
+          const newMovie = {
+            title: userInput,
+            votes: 0,
+            image: movieImg,
+          };
+          dbRef.push(newMovie);
+          this.setState({
+            userInput: ""
+          });
         }
       )
 
-      const newMovie = {
-        title: movieTitle,
-        votes: 1,
-        image: ""
-      }
-      dbRef.push(newMovie);
-      this.setState({
-        userInput: "",
-      });
+      
     }
   }
+
+  //this function will update state to show the results or not
+  showResultsHandler = (boolValue) => this.setState({showResults: boolValue});
 
   voteHandler = (event, key, voteToAdd) => {
     // go to key in database respreseinting the movie
@@ -100,16 +107,26 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <AddOption addMovieHandler={this.addMovieHandler}/>
+        <AddOption
+          showResultsHandler={this.showResultsHandler}
+          addMovieHandler={this.addMovieHandler}
+        />
+        {this.state.showResults && <ResultScreen />}
         <ul className="movieGallery">
-          {
-            this.state.movieOptions.map((movie) => {
-              const {movieID, movieTitle, votes} = movie;
-              return <MovieOption movieID={movieID} movieTitle={movieTitle} votes={votes} voteHandler={this.voteHandler}/>;
-            })
-          }
+          {this.state.movieOptions.map((movie, i) => {
+            const { movieID, movieTitle, votes, image } = movie;
+            return (
+              <MovieOption
+                key={i}
+                movieID={movieID}
+                movieTitle={movieTitle}
+                image={image}
+                votes={votes}
+                voteHandler={this.voteHandler}
+              />
+            );
+          })}
         </ul>
-        
       </div>
     );
   }
