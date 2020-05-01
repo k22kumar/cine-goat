@@ -14,7 +14,8 @@ class ResultScreen extends Component {
           <div className="resultsContainer">
             <div className="searchMessageContainer">
               <p className="message">{this.state.message}</p>
-              <button className="close">
+              <button className="close" 
+              onClick={() => {this.props.showResultsHandler(false)}}>
                 <i className="far fa-times-circle"></i>
               </button>
             </div>
