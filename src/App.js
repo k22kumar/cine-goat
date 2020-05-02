@@ -73,12 +73,13 @@ class App extends Component {
         total_results: 5,
       },
     }).then((response) => {
-      console.log("the response");
-      console.log(response.data.results);
-      console.log("end response")
+      // console.log("the response");
+      // console.log(response.data.results);
+      // console.log("end response")
+      const theResponse = response;
       response.data.results.length === 0 ?
         this.setState({resultsMessage: "Sorry no results :("}) :
-        this.resultsHandler(response, movieDBURL, baseImageURL, userInput);
+        this.resultsHandler(theResponse.data.results, movieDBURL, baseImageURL, userInput);
         console.log("messagebeing SET: ", this.state.resultsMessage)
     });
   };
@@ -86,28 +87,25 @@ class App extends Component {
   resultsHandler = (response, movieDBURL, baseImageURL, userInput) => {
     // console.log("resultsHandler: ", response);
     const movieResults =[]
+    // console.log("response");
+    // console.log(response);
 
-    for(let movie in response.data) {
-      // this.state.includes(movie.title) ?
-      // const newVotes = 
+    response.forEach((movie) => {
       let newVotes = 0;
-      for(let savedMovie in this.state.movieOptions) {
-        if(movie.title === savedMovie.movieTitle){
+      this.state.movieOptions.forEach((savedMovie) => {
+        if (movie.title === savedMovie.movieTitle) {
           newVotes = savedMovie.votes;
         }
-         const movieImg = `${baseImageURL}${movie.poster_path}`;
-         const newMovie = {
-           title: userInput,
-           votes: newVotes,
-           image: movieImg,
-         };
-         movieResults.push(newMovie);
-      }
-      // console.log(movieResults);
-      this.setState({results: movieResults});
-     
-
-    }
+        const movieImg = `${baseImageURL}${movie.poster_path}`;
+        const newMovie = {
+          title: movie.title,
+          votes: newVotes,
+          image: movieImg,
+        };
+        movieResults.push(newMovie);
+      });
+    });
+    this.setState({results: movieResults});
 
   }
 
@@ -179,7 +177,7 @@ class App extends Component {
 
 
   render() {
-    console.log("resultsMessageBeinSent", this.resultsMessage);
+    // console.log("resultsMessageBeinSent", this.resultsMessage);
     return (
       <div className="App">
         <AddOption
@@ -189,6 +187,7 @@ class App extends Component {
           inputHandler={this.inputHandler}
         />
         {this.state.showResults && <ResultScreen
+        results={this.state.results}
         resultsMessage={this.state.resultsMessage} 
         showResultsHandler={this.showResultsHandler} />}
         <ul className="movieGallery">

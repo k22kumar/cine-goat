@@ -49,13 +49,13 @@ img {
   .imgAndVotes {
     display: flex;
     flex-direction: column;
-      .movieImg {
+      .movieImg, .resultPoster {
         width: 150px;
       }
   }
   .likeAndDislike {
     display: flex;
-    .like, .dislike {
+    .like, .dislike, .addToList {
       flex: 1 0 20px;
       height: 30px;
     }
@@ -71,7 +71,6 @@ img {
 }
 
 .resultsContainer {
-
   .searchMessageContainer {
     display: flex;
     justify-content: center;
@@ -90,3 +89,7 @@ img {
   }
 }
 
+.results {
+  display: flex;
+  justify-content: center;
+}
