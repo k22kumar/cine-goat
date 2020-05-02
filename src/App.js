@@ -5,6 +5,7 @@ import MovieOption from "./MovieOption";
 import firebase from "./firebase";
 import axios from "axios";
 import ResultScreen from "./ResultScreen";
+import MovieResult from './MovieResult';
 
 class App extends Component {
   constructor() {
@@ -15,7 +16,7 @@ class App extends Component {
       userInput: "enter a movie",
       showResults: false,
       resultsMessage: "Type a movie to Search!",
-      results: []
+      results: [],
     };
   }
 
@@ -25,6 +26,7 @@ class App extends Component {
     dbRef.on("value", (snapshot) => {
       const data = snapshot.val();
       const movieArray = [];
+      const titlesArray = [];
       for (let key in data) {
         movieArray.push(
           {
@@ -34,10 +36,14 @@ class App extends Component {
             votes: data[key].votes
           }
         )
+        // titlesArray.push(data[key].title);
       }
       // update the movie state array
+      //we are storing the titles array in a seperate array so that we can check later using 
+      // .includes if the movie is already an option 
       this.setState({
-        movieOptions: movieArray
+        movieOptions: movieArray,
+        // storedTitles: titlesArray
       })
     });
   }
@@ -64,11 +70,13 @@ class App extends Component {
       params: {
         api_key: apiKey,
         query: userInput,
-        total_results: 20,
+        total_results: 5,
       },
     }).then((response) => {
-      // console.log(response.data.results);
-      response.length === 0 ?
+      console.log("the response");
+      console.log(response.data.results);
+      console.log("end response")
+      response.data.results.length === 0 ?
         this.setState({resultsMessage: "Sorry no results :("}) :
         this.resultsHandler(response, movieDBURL, baseImageURL, userInput);
         console.log("messagebeing SET: ", this.state.resultsMessage)
@@ -76,16 +84,31 @@ class App extends Component {
   };
 
   resultsHandler = (response, movieDBURL, baseImageURL, userInput) => {
-    console.log("resultsHandler: ", response);
+    // console.log("resultsHandler: ", response);
+    const movieResults =[]
 
+    for(let movie in response.data) {
+      // this.state.includes(movie.title) ?
+      // const newVotes = 
+      let newVotes = 0;
+      for(let savedMovie in this.state.movieOptions) {
+        if(movie.title === savedMovie.movieTitle){
+          newVotes = savedMovie.votes;
+        }
+         const movieImg = `${baseImageURL}${movie.poster_path}`;
+         const newMovie = {
+           title: userInput,
+           votes: newVotes,
+           image: movieImg,
+         };
+         movieResults.push(newMovie);
+      }
+      // console.log(movieResults);
+      this.setState({results: movieResults});
+     
 
+    }
 
-    const movieImg = `${baseImageURL}${response.data.results[0].poster_path}`;
-    const newMovie = {
-      title: userInput,
-      votes: 0,
-      image: movieImg,
-    };
   }
 
   noResultsToShow = () => {this.setState({resultsMessage: "Sorry, no matches :("})};
@@ -123,7 +146,7 @@ class App extends Component {
         (response) => {
           const movieImg = `${baseImageURL}${response.data.results[0].poster_path}`;
           const newMovie = {
-            title: userInput,
+            title: response.data.results[0].title,
             votes: 0,
             image: movieImg,
           };

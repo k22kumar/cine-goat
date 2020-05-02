@@ -32,8 +32,8 @@ class MovieOption extends Component {
             </li>
             <li className="movieImg">
               <img
-                src={this.props.image === "" ? tempImg : this.props.image}
-                alt="a sample movie image"
+                src={this.props.image}
+                alt={"Movie poster for: " +this.props.movieTitle}
               />
             </li>
             <li className="likeAndDislike">
