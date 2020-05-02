@@ -9,11 +9,13 @@ class ResultScreen extends Component {
         }
     }
 
+
     render() {
+      console.log("receivedMessage", this.props.resultsMessage)
         return (
           <div className="resultsContainer">
             <div className="searchMessageContainer">
-              <p className="message">{this.state.message}</p>
+              <p className="message">{this.props.resultsMessage}</p>
               <button className="close" 
               onClick={() => {this.props.showResultsHandler(false)}}>
                 <i className="far fa-times-circle"></i>

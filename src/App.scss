@@ -70,3 +70,23 @@ img {
 
 }
 
+.resultsContainer {
+
+  .searchMessageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+
+    .message {
+      margin: 0;
+      margin-right: 10px;
+    }
+
+    .close {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+

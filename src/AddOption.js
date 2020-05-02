@@ -14,6 +14,10 @@ class AddOption extends Component {
     this.setState({
       userInput: e.target.value,
     });
+
+    this.state.userInput === "" ?
+    this.props.noInputHandler() :
+    this.props.inputHandler(this.state.userInput);
   };
 
   // defered function to pass movie titles from input to main App

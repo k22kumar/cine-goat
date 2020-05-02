@@ -13,7 +13,9 @@ class App extends Component {
     this.state = {
       movieOptions: [],
       userInput: "enter a movie",
-      showResults: false
+      showResults: false,
+      resultsMessage: "Type a movie to Search!",
+      results: []
     };
   }
 
@@ -41,9 +43,62 @@ class App extends Component {
   }
 
   // helper methods
+
+
+  noInputHandler = () => this.setState({resultsMessage: "Type a movie to search!"});
+
+  inputHandler = (userInput) => {
+
+    const dbRef = firebase.database().ref();
+    const apiKey = `ffb95a5b116cb8ae246c7c6f51c94ed6`;
+
+    // make an api call to themovieDatabbase
+    const movieDBURL = `https://api.themoviedb.org/3/search/movie?`;
+    //endpoint to movie poster path
+    const baseImageURL = `https://image.tmdb.org/t/p/w500`;
+
+    axios({
+      url: movieDBURL,
+      method: `GET`,
+      responseType: `json`,
+      params: {
+        api_key: apiKey,
+        query: userInput,
+        total_results: 20,
+      },
+    }).then((response) => {
+      // console.log(response.data.results);
+      response.length === 0 ?
+        this.setState({resultsMessage: "Sorry no results :("}) :
+        this.resultsHandler(response, movieDBURL, baseImageURL, userInput);
+        console.log("messagebeing SET: ", this.state.resultsMessage)
+    });
+  };
+
+  resultsHandler = (response, movieDBURL, baseImageURL, userInput) => {
+    console.log("resultsHandler: ", response);
+
+
+
+    const movieImg = `${baseImageURL}${response.data.results[0].poster_path}`;
+    const newMovie = {
+      title: userInput,
+      votes: 0,
+      image: movieImg,
+    };
+  }
+
+  noResultsToShow = () => {this.setState({resultsMessage: "Sorry, no matches :("})};
+
+
+
+
+
+
+
+
+
   addMovieHandler = (event, userInput) => {
-    
-    
     const dbRef = firebase.database().ref();
     event.preventDefault();
     if (userInput !== "") {
@@ -66,10 +121,6 @@ class App extends Component {
         }
       }).then(
         (response) => {
-          console.log(response.data.results[0]);
-          
-
-
           const movieImg = `${baseImageURL}${response.data.results[0].poster_path}`;
           const newMovie = {
             title: userInput,
@@ -105,13 +156,18 @@ class App extends Component {
 
 
   render() {
+    console.log("resultsMessageBeinSent", this.resultsMessage);
     return (
       <div className="App">
         <AddOption
           showResultsHandler={this.showResultsHandler}
           addMovieHandler={this.addMovieHandler}
+          noInputHandler={this.noInputHandler}
+          inputHandler={this.inputHandler}
         />
-        {this.state.showResults && <ResultScreen />}
+        {this.state.showResults && <ResultScreen
+        resultsMessage={this.state.resultsMessage} 
+        showResultsHandler={this.showResultsHandler} />}
         <ul className="movieGallery">
           {this.state.movieOptions.map((movie, i) => {
             const { movieID, movieTitle, votes, image } = movie;
