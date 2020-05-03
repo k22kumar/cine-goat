@@ -39,6 +39,15 @@ class App extends Component {
         )
         titlesArray.push(data[key].title);
       }
+      // forEach ()
+
+      if(this.state.results.length>0) {
+        const newResults = this.state.results.filter((result) => {
+          return !this.state.movieOptionsTitles.includes(result.title);
+        })
+          this.setState({results: newResults});
+      }
+
       // update the movie state array
       //we are storing the titles array in a seperate array so that we can check later using 
       // .includes if the movie is already an option 
@@ -92,8 +101,8 @@ class App extends Component {
     // console.log("response");
     // console.log(response);
 
+
     response.forEach((movie) => {
-      console.log("poster: ",movie.poster_path)
         if (!this.state.movieOptionsTitles.includes(movie.title) && movie.poster_path != null){
           const movieImg = `${baseImageURL}${movie.poster_path}`;
           const newMovie = {
@@ -103,7 +112,7 @@ class App extends Component {
           movieResults.push(newMovie);
         }
     });
-    this.setState({results: movieResults});
+    this.setState({ results: movieResults });
 
   }
 
