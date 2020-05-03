@@ -110,51 +110,15 @@ class App extends Component {
   noResultsToShow = () => {this.setState({resultsMessage: "Sorry, no matches :("})};
 
 
-
-
-
-
-
-
-
-  addMovieHandler = (event, userInput) => {
+  addMovieHandler = (movieTitle, poster) => {
     const dbRef = firebase.database().ref();
-    event.preventDefault();
-    if (userInput !== "") {
-      console.log("clicked for a movie");
-      const apiKey = `ffb95a5b116cb8ae246c7c6f51c94ed6`;
-      
-      // make an api call to themovieDatabbase
-      const movieDBURL = `https://api.themoviedb.org/3/search/movie?`;
-      //endpoint to movie poster path
-      const baseImageURL = `https://image.tmdb.org/t/p/w500`;
-
-
-      axios({
-        url: movieDBURL,
-        method: `GET`,
-        responseType: `json`,
-        params: {
-          api_key: apiKey,
-          query: userInput
-        }
-      }).then(
-        (response) => {
-          const movieImg = `${baseImageURL}${response.data.results[0].poster_path}`;
+    console.log("clicked for a movie");
           const newMovie = {
-            title: response.data.results[0].title,
+            title: movieTitle,
             votes: 0,
-            image: movieImg,
+            image: poster,
           };
           dbRef.push(newMovie);
-          this.setState({
-            userInput: ""
-          });
-        }
-      )
-
-      
-    }
   }
 
   //this function will update state to show the results or not
@@ -180,7 +144,6 @@ class App extends Component {
       <div className="App">
         <SearchOption
           showResultsHandler={this.showResultsHandler}
-          addMovieHandler={this.addMovieHandler}
           noInputHandler={this.noInputHandler}
           inputHandler={this.inputHandler}
         />
@@ -199,6 +162,7 @@ class App extends Component {
                   title={title}
                   votes={votes}
                   image={image}
+                  addMovieHandler={this.addMovieHandler}
                 />
               );
             })}

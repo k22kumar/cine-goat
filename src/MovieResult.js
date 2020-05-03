@@ -5,6 +5,8 @@ class MovieResult extends Component {
     super();
   }
 
+  // defered function to pass movie titles from input to main App
+  deferedAddMovie = (e) => this.props.addMovieHandler(this.props.title, this.props.image);
 
   render() {
     return (
@@ -22,9 +24,6 @@ class MovieResult extends Component {
       </li>
     );
   }
-
-
-  
 }
 
 export default MovieResult;

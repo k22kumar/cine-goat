@@ -20,9 +20,6 @@ class SearchOption extends Component {
     this.props.inputHandler(this.state.userInput);
   };
 
-  // defered function to pass movie titles from input to main App
-  deferedAddMovie = (e) => this.props.addMovieHandler(e, this.state.userInput);
-
   //defered function to show the window, it takes a boolean value to update the state in App
   deferedShowResults = (e, boolValue) => {this.props.showResultsHandler(boolValue)};
 
