@@ -12,7 +12,13 @@ class MovieResult extends Component {
         <div className="resultPoster">
           <img src={this.props.image} alt={this.props.title} />
         </div>
-        <button className="addToList">Add Candidate</button>
+        <button
+          aria-label="Click here to add a movie option"
+          onClick={this.deferedAddMovie}
+          className="addToList"
+        >
+          Add Candidate <i className="fas fa-plus"></i>
+        </button>
       </li>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // this component will handle adding a new movie option to the database
 
-class AddOption extends Component {
+class SearchOption extends Component {
   constructor() {
     super();
     this.state = {
@@ -38,17 +38,9 @@ class AddOption extends Component {
             onChange={this.handleUserInput}
           />
         </li>
-        <li className="addButton">
-          <button
-            aria-label="Click here to add a movie option"
-            onClick={this.deferedAddMovie}
-          >
-            <i className="fas fa-plus"></i>
-          </button>
-        </li>
       </ul>
     );
   }
 }
 
-export default AddOption;
+export default SearchOption;

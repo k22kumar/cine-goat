@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.scss";
-import AddOption from "./AddOption";
+import SearchOption from "./SearchOption";
 import MovieOption from "./MovieOption";
 import firebase from "./firebase";
 import axios from "axios";
@@ -17,6 +17,7 @@ class App extends Component {
       showResults: false,
       resultsMessage: "Type a movie to Search!",
       results: [],
+      movieOptionTitles:[]
     };
   }
 
@@ -36,14 +37,14 @@ class App extends Component {
             votes: data[key].votes
           }
         )
-        // titlesArray.push(data[key].title);
+        titlesArray.push(data[key].title);
       }
       // update the movie state array
       //we are storing the titles array in a seperate array so that we can check later using 
       // .includes if the movie is already an option 
       this.setState({
         movieOptions: movieArray,
-        // storedTitles: titlesArray
+        movieOptionsTitles: titlesArray
       })
     });
   }
@@ -92,19 +93,15 @@ class App extends Component {
     // console.log(response);
 
     response.forEach((movie) => {
-      let newVotes = 0;
-      this.state.movieOptions.forEach((savedMovie) => {
-        if (movie.title === savedMovie.movieTitle) {
-          newVotes = savedMovie.votes;
+      console.log("poster: ",movie.poster_path)
+        if (!this.state.movieOptionsTitles.includes(movie.title) && movie.poster_path != null){
+          const movieImg = `${baseImageURL}${movie.poster_path}`;
+          const newMovie = {
+            title: movie.title,
+            image: movieImg
+          };
+          movieResults.push(newMovie);
         }
-        const movieImg = `${baseImageURL}${movie.poster_path}`;
-        const newMovie = {
-          title: movie.title,
-          votes: newVotes,
-          image: movieImg,
-        };
-        movieResults.push(newMovie);
-      });
     });
     this.setState({results: movieResults});
 
@@ -181,7 +178,7 @@ class App extends Component {
     // console.log("resultsMessageBeinSent", this.resultsMessage);
     return (
       <div className="App">
-        <AddOption
+        <SearchOption
           showResultsHandler={this.showResultsHandler}
           addMovieHandler={this.addMovieHandler}
           noInputHandler={this.noInputHandler}
