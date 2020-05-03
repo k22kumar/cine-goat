@@ -16,7 +16,7 @@ class ResultScreen extends Component {
         return (
           <div className="resultsContainer">
             <div className="searchMessageContainer">
-              <p className="message">{this.props.resultsMessage}</p>
+              <p className="message">Click "X" to close results</p>
               <button
                 className="close"
                 onClick={() => {

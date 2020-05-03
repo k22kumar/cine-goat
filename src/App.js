@@ -100,10 +100,7 @@ class App extends Component {
   };
 
   resultsHandler = (response, movieDBURL, baseImageURL, userInput) => {
-    // console.log("resultsHandler: ", response);
     const movieResults =[]
-    // console.log("response");
-    // console.log(response);
 
 
     response.forEach((movie) => {
@@ -156,6 +153,8 @@ class App extends Component {
     return (
       <div className="App">
         <header>
+        <h1 className="mainTitle">cinegoat</h1>
+        <p cl>An app that tracks the best movie!</p>
           <SearchOption
             showResultsHandler={this.showResultsHandler}
             noInputHandler={this.noInputHandler}
