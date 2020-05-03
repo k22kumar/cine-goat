@@ -71,7 +71,7 @@ img {
   flex-direction: column;
   width: 150px;
   margin: 0 10px;
-  .imgAndVotes {
+  .imgAndLikes {
     display: flex;
     flex-direction: column;
   }
@@ -149,19 +149,23 @@ img {
   justify-content: space-between;
   flex-direction: column;
   margin: 10px;
-  height: 245px;
+  height: 250px;
   width:150px;
+  border-radius: 10px;
 }
 
-.movieResult {
+.movieResult, .imgAndLikes {
+  /*credit https://codepen.io/sdthornton/pen/wBZdXq*/
+   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.imgAndLikes, .movieResult {
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .movieImg, .resultPoster {
   width: 150px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  overflow: hidden;
     img {
         height: 225px;
         margin: auto;
@@ -179,13 +183,7 @@ img {
   transition: all 0.3s;
 }
 
-.like, .addToList {
-  border-bottom-left-radius: 10px;
-}
 
-.dislike, .addToList {
-  border-bottom-right-radius: 10px;
-}
 
 .addToList:hover, .addToList:focus {
   background-color: skyblue;
