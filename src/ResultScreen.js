@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MovieResult from './MovieResult.js';
 
 
 class ResultScreen extends Component {
@@ -9,17 +10,26 @@ class ResultScreen extends Component {
         }
     }
 
+
     render() {
+      console.log("receivedMessage", this.props.resultsMessage)
         return (
           <div className="resultsContainer">
             <div className="searchMessageContainer">
-              <p className="message">{this.state.message}</p>
-              <button className="close" 
-              onClick={() => {this.props.showResultsHandler(false)}}>
+              <p className="message">{this.props.resultsMessage}</p>
+              <button
+                className="close"
+                onClick={() => {
+                  this.props.showResultsHandler(false);
+                }}
+              >
                 <i className="far fa-times-circle"></i>
               </button>
             </div>
-            <ul className="results"></ul>
+            <ul className="results">
+                { console.log("sup", this.props.results)}
+              {this.props.children }
+            </ul>
           </div>
         );
     }

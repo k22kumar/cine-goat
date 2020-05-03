@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // this component will handle adding a new movie option to the database
 
-class AddOption extends Component {
+class SearchOption extends Component {
   constructor() {
     super();
     this.state = {
@@ -14,10 +14,11 @@ class AddOption extends Component {
     this.setState({
       userInput: e.target.value,
     });
-  };
 
-  // defered function to pass movie titles from input to main App
-  deferedAddMovie = (e) => this.props.addMovieHandler(e, this.state.userInput);
+    this.state.userInput === "" ?
+    this.props.noInputHandler() :
+    this.props.inputHandler(this.state.userInput);
+  };
 
   //defered function to show the window, it takes a boolean value to update the state in App
   deferedShowResults = (e, boolValue) => {this.props.showResultsHandler(boolValue)};
@@ -34,17 +35,9 @@ class AddOption extends Component {
             onChange={this.handleUserInput}
           />
         </li>
-        <li className="addButton">
-          <button
-            aria-label="Click here to add a movie option"
-            onClick={this.deferedAddMovie}
-          >
-            <i className="fas fa-plus"></i>
-          </button>
-        </li>
       </ul>
     );
   }
 }
 
-export default AddOption;
+export default SearchOption;
