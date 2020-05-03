@@ -7,6 +7,10 @@ import axios from "axios";
 import ResultScreen from "./ResultScreen";
 import MovieResult from './MovieResult';
 
+
+//TO MARKER , I am having issues updating the search results LIVE when a movie is added to the movieOptions. It looks like my results array state is being updated when I add movies, but I dont understand why my new search results are not rendering new MovieResults when the results state is updated. 
+
+// Also why is it when search is focused, my gallery results seem to have its width shrunk for some reason?
 class App extends Component {
   constructor() {
     //put all the movie options in an array and map over them
@@ -151,47 +155,53 @@ class App extends Component {
     // console.log("resultsMessageBeinSent", this.resultsMessage);
     return (
       <div className="App">
-        <SearchOption
-          showResultsHandler={this.showResultsHandler}
-          noInputHandler={this.noInputHandler}
-          inputHandler={this.inputHandler}
-        />
-        {this.state.showResults && (
-          <ResultScreen
-            results={this.state.results}
-            resultsMessage={this.state.resultsMessage}
+        <header>
+          <SearchOption
             showResultsHandler={this.showResultsHandler}
-          >
-            {this.state.results.map((movieResult, i) => {
-              const { image, title, votes } = movieResult;
-              {/* console.log("yo", movieResult);s */}
+            noInputHandler={this.noInputHandler}
+            inputHandler={this.inputHandler}
+          />
+          {this.state.showResults && (
+            <ResultScreen
+              results={this.state.results}
+              resultsMessage={this.state.resultsMessage}
+              showResultsHandler={this.showResultsHandler}
+            >
+              {this.state.results.map((movieResult, i) => {
+                const { image, title, votes } = movieResult;
+                {
+                  /* console.log("yo", movieResult);s */
+                }
+                return (
+                  <MovieResult
+                    key={i}
+                    title={title}
+                    votes={votes}
+                    image={image}
+                    addMovieHandler={this.addMovieHandler}
+                  />
+                );
+              })}
+            </ResultScreen>
+          )}
+        </header>
+        <main>
+          <ul className="movieGallery">
+            {this.state.movieOptions.map((movie, i) => {
+              const { movieID, movieTitle, votes, image } = movie;
               return (
-                <MovieResult
+                <MovieOption
                   key={i}
-                  title={title}
-                  votes={votes}
+                  movieID={movieID}
+                  movieTitle={movieTitle}
                   image={image}
-                  addMovieHandler={this.addMovieHandler}
+                  votes={votes}
+                  voteHandler={this.voteHandler}
                 />
               );
             })}
-          </ResultScreen>
-        )}
-        <ul className="movieGallery">
-          {this.state.movieOptions.map((movie, i) => {
-            const { movieID, movieTitle, votes, image } = movie;
-            return (
-              <MovieOption
-                key={i}
-                movieID={movieID}
-                movieTitle={movieTitle}
-                image={image}
-                votes={votes}
-                voteHandler={this.voteHandler}
-              />
-            );
-          })}
-        </ul>
+          </ul>
+        </main>
       </div>
     );
   }

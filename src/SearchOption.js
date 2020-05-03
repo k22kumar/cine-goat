@@ -25,17 +25,21 @@ class SearchOption extends Component {
 
   render() {
     return (
-      <ul className="addOptionContainer">
-        <li>
-          <label htmlFor="movieOption">Add movie:</label>
-          <input
-            type="text"
-            name="movieOption"
-            onFocus={(e) => this.deferedShowResults(e, true)}
-            onChange={this.handleUserInput}
-          />
-        </li>
-      </ul>
+      <div className="searchOptionContainer">
+        <label htmlFor="movieOption" className="visuallyHidden">
+          Search for a movie
+        </label>
+        <input
+          type="text"
+          name="movieOption"
+          onFocus={(e) => this.deferedShowResults(e, true)}
+          onChange={this.handleUserInput}
+          placeholder="Search for a movie"
+        />
+        <p>
+          <i class="fas fa-search"></i>
+        </p>
+      </div>
     );
   }
 }

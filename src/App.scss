@@ -5,6 +5,10 @@ html {
   font-size: 62.5%;
 }
 
+body{
+  background-color: $background;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -13,7 +17,7 @@ ul {
 input, button { border:none; }
 
 button {
-  background: #1E88E5;
+  background: $button-primary;
   color: white;
   white-space: nowrap;
   text-decoration: none;
@@ -28,6 +32,9 @@ img {
 
 .App {
   text-align: center;
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
   .movieGallery {
     display: flex;
     justify-content: center;
@@ -35,11 +42,29 @@ img {
   }
 }
 
-.addOptionContainer {
+.searchOptionContainer {
   display: flex;
   justify-content: center;
-
+  align-items: center;
+  input {
+    width: 300px;
+    font-size: 2rem;
+    height: 30px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 0 15px;
+  }
+  p{
+    height: 30px;
+    font-size: 2rem;
+    background-color: white;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 0 5px;
+  }
 }
+
+
 
 .movieOptionContainer {
   display: flex;
@@ -50,18 +75,32 @@ img {
     display: flex;
     flex-direction: column;
   }
+
+  .votes{
+    font-size: 1.3rem;
+  }
+
   .likeAndDislike {
     display: flex;
     .like, .dislike {
       flex: 1 0 20px;
       height: 30px;
     }
+
+    .like{
+      background-color: $like;
+    }
+
+    .dislike{
+      background-color: $dislike;
+    }
+
     .like:hover,.like:focus {
-      background-color: green;
+      background-color: $like;
     }
 
     .dislike:hover, .dislike:focus {
-      background-color: red;
+      background-color: $dislike;
     }
   }
 
@@ -80,9 +119,21 @@ img {
     }
 
     .close {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
       width: 30px;
       height: 30px;
+      border-radius: 10px;
+      transition: all 0.3s;
     }
+
+    .close:hover, .close:active {
+      background-color: $button-highlight;
+      color: black;
+    }
+
   }
 }
 
@@ -102,8 +153,15 @@ img {
   width:150px;
 }
 
+.movieResult {
+  border-radius: 10px;
+}
+
 .movieImg, .resultPoster {
   width: 150px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: hidden;
     img {
         height: 225px;
         margin: auto;
@@ -114,4 +172,22 @@ img {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  font-size: 1.3rem;
+}
+
+.like, .dislike, .addToList {
+  transition: all 0.3s;
+}
+
+.like, .addToList {
+  border-bottom-left-radius: 10px;
+}
+
+.dislike, .addToList {
+  border-bottom-right-radius: 10px;
+}
+
+.addToList:hover, .addToList:focus {
+  background-color: skyblue;
+  color: black;
 }
