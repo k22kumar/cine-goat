@@ -154,7 +154,7 @@ class App extends Component {
       <div className="App">
         <header>
         <h1 className="mainTitle">cinegoat</h1>
-        <p cl>An app that tracks the best movie!</p>
+        <p className="description">An app that tracks the best movie!</p>
           <SearchOption
             showResultsHandler={this.showResultsHandler}
             noInputHandler={this.noInputHandler}
