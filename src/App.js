@@ -70,7 +70,8 @@ class App extends Component {
       params: {
         api_key: apiKey,
         query: userInput,
-        total_results: 5,
+        page: 1
+        
       },
     }).then((response) => {
       // console.log("the response");
@@ -186,10 +187,26 @@ class App extends Component {
           noInputHandler={this.noInputHandler}
           inputHandler={this.inputHandler}
         />
-        {this.state.showResults && <ResultScreen
-        results={this.state.results}
-        resultsMessage={this.state.resultsMessage} 
-        showResultsHandler={this.showResultsHandler} />}
+        {this.state.showResults && (
+          <ResultScreen
+            results={this.state.results}
+            resultsMessage={this.state.resultsMessage}
+            showResultsHandler={this.showResultsHandler}
+          >
+            {this.state.results.map((movieResult, i) => {
+              const { image, title, votes } = movieResult;
+              {/* console.log("yo", movieResult);s */}
+              return (
+                <MovieResult
+                  key={i}
+                  title={title}
+                  votes={votes}
+                  image={image}
+                />
+              );
+            })}
+          </ResultScreen>
+        )}
         <ul className="movieGallery">
           {this.state.movieOptions.map((movie, i) => {
             const { movieID, movieTitle, votes, image } = movie;

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import MovieResult from './MovieResult';
+import MovieResult from './MovieResult.js';
 
 
 class ResultScreen extends Component {
-    constructor(props) {
+    constructor() {
         super();
         this.state = {
-            message: "No results found :(",
-            results: props.results
+            message: "No results found :("
         }
     }
 
@@ -28,19 +27,8 @@ class ResultScreen extends Component {
               </button>
             </div>
             <ul className="results">
-                {"sup", console.log(this.state.results)}
-              {this.state.results.map((movieResult, i) => {
-                const { image, title, votes } = movieResult;
-                console.log("yo",this.state.results);
-                return(
-                  <MovieResult
-                  key={i}
-                  title={title}
-                  votes={votes}
-                  image={image}
-                  />
-                )
-              })}
+                { console.log("sup", this.props.results)}
+              {this.props.children }
             </ul>
           </div>
         );

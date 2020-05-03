@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const MovieResult = () => {
+class MovieResult extends Component {
+  constructor() {
+    super();
+  }
+
+
+  render() {
     return (
-      <div>
+      <li className="movieResult">
         <div className="resultPoster">
           <img src={this.props.image} alt={this.props.title} />
         </div>
         <button className="addToList">Add Candidate</button>
-      </div>
+      </li>
     );
+  }
+
+
+  
 }
 
 export default MovieResult;
