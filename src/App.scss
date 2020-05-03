@@ -107,13 +107,11 @@ h1 {
       background-color: $dislike;
     }
 
-    .like:hover,.like:focus {
-      background-color: $like;
+    .like:hover, .like:focus, .dislike:hover, .dislike:focus {
+      background-color: white;
+      color: black;
     }
 
-    .dislike:hover, .dislike:focus {
-      background-color: $dislike;
-    }
   }
 
 }
