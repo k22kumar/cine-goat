@@ -42,7 +42,7 @@ h1 {
   max-width: 1280px;
   margin: 0 auto;
   .description {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
   .movieGallery {
     display: flex;
@@ -56,9 +56,9 @@ h1 {
   justify-content: center;
   align-items: center;
   input {
-    width: 300px;
+    width: 320px;
     font-size: 2rem;
-    height: 30px;
+    height: 40px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     padding: 0 15px;
@@ -67,12 +67,12 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30px;
+    height: 40px;
     font-size: 2rem;
     background-color: white;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    padding: 0 5px;
+    padding: 0 10px;
   }
 }
 
@@ -127,6 +127,7 @@ h1 {
     font-size: 1.3rem;
 
     .message {
+      font-size: 1.5rem;
       margin: 0;
       margin-right: 10px;
     }
