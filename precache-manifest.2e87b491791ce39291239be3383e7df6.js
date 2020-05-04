@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ab89275889ba9e577e4049d326365732",
+    "revision": "56cf46eb0e563150e95e766874e9e94f",
     "url": "/cine-goat/index.html"
   },
   {
-    "revision": "975c44ef19ed2b14423a",
-    "url": "/cine-goat/static/css/main.2b858b8e.chunk.css"
+    "revision": "b12a0f8d38fd23662d76",
+    "url": "/cine-goat/static/css/main.87aa7422.chunk.css"
   },
   {
     "revision": "65e0ea9d3012f680f1a0",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/cine-goat/static/js/2.462cbe2d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "975c44ef19ed2b14423a",
+    "revision": "b12a0f8d38fd23662d76",
     "url": "/cine-goat/static/js/main.ca9199f0.chunk.js"
   },
   {

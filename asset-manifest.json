@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/cine-goat/static/css/main.2b858b8e.chunk.css",
+    "main.css": "/cine-goat/static/css/main.87aa7422.chunk.css",
     "main.js": "/cine-goat/static/js/main.ca9199f0.chunk.js",
     "main.js.map": "/cine-goat/static/js/main.ca9199f0.chunk.js.map",
     "runtime-main.js": "/cine-goat/static/js/runtime-main.51a35cb2.js",
@@ -8,16 +8,16 @@
     "static/js/2.462cbe2d.chunk.js": "/cine-goat/static/js/2.462cbe2d.chunk.js",
     "static/js/2.462cbe2d.chunk.js.map": "/cine-goat/static/js/2.462cbe2d.chunk.js.map",
     "index.html": "/cine-goat/index.html",
-    "precache-manifest.09f633eda6fe9055958b1dc18b45fd59.js": "/cine-goat/precache-manifest.09f633eda6fe9055958b1dc18b45fd59.js",
+    "precache-manifest.2e87b491791ce39291239be3383e7df6.js": "/cine-goat/precache-manifest.2e87b491791ce39291239be3383e7df6.js",
     "service-worker.js": "/cine-goat/service-worker.js",
-    "static/css/main.2b858b8e.chunk.css.map": "/cine-goat/static/css/main.2b858b8e.chunk.css.map",
+    "static/css/main.87aa7422.chunk.css.map": "/cine-goat/static/css/main.87aa7422.chunk.css.map",
     "static/js/2.462cbe2d.chunk.js.LICENSE.txt": "/cine-goat/static/js/2.462cbe2d.chunk.js.LICENSE.txt",
     "static/media/temp.jpg": "/cine-goat/static/media/temp.75e38e06.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.51a35cb2.js",
     "static/js/2.462cbe2d.chunk.js",
-    "static/css/main.2b858b8e.chunk.css",
+    "static/css/main.87aa7422.chunk.css",
     "static/js/main.ca9199f0.chunk.js"
   ]
 }
