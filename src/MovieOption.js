@@ -23,8 +23,6 @@ class MovieOption extends Component {
 
 
     render() {
-      // you can create some logic here like adding a variable and then instead of putting className put a variable
-      // console.log("props", this.props);
         return (
           <article className="movieOptionContainer">
               <p className="votes">Votes: {this.props.votes}</p>
@@ -36,7 +34,6 @@ class MovieOption extends Component {
                 />
               </li>
               <li className="likeAndDislike">
-                {/* put a turnerary that decides if it has been clicked then unclick dislike inside the button itself since it is JSX*/}
                 <button
                   className="like"
                   onClick={(e) => this.deferredLike(e, this.props.movieID)}

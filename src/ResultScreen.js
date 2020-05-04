@@ -12,7 +12,6 @@ class ResultScreen extends Component {
 
 
     render() {
-      console.log("receivedMessage", this.props.resultsMessage)
         return (
           <div className="resultsContainer">
             <div className="searchMessageContainer">
@@ -27,7 +26,6 @@ class ResultScreen extends Component {
               </button>
             </div>
             <ul className="results">
-                { console.log("sup", this.props.results)}
               {this.props.children }
             </ul>
           </div>

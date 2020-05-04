@@ -32,7 +32,7 @@ img {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 4rem;
   font-family: 'Chonburi', cursive;
   text-transform: uppercase;
 }
@@ -82,7 +82,9 @@ h1 {
   display: flex;
   flex-direction: column;
   width: 150px;
-  margin: 0 10px;
+  margin: 10px;
+  background-color: $votes;
+  color: $voteFont;
   .imgAndLikes {
     display: flex;
     flex-direction: column;
@@ -90,6 +92,7 @@ h1 {
 
   .votes{
     font-size: 1.3rem;
+    margin: 7px 0;
   }
 
   .likeAndDislike {
@@ -139,8 +142,8 @@ h1 {
       transition: all 0.3s;
     }
 
-    .close:hover, .close:active {
-      background-color: $button-highlight;
+    .close:hover, .close:focus {
+      background-color: white;
       color: black;
     }
 
@@ -164,15 +167,13 @@ h1 {
   border-radius: 10px;
 }
 
-.movieResult, .imgAndLikes {
+.movieResult, .movieOptionContainer {
   /*credit https://codepen.io/sdthornton/pen/wBZdXq*/
    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+   border-radius: 10px;
+   overflow: hidden;
 }
 
-.imgAndLikes, .movieResult {
-  border-radius: 10px;
-  overflow: hidden;
-}
 
 .movieImg, .resultPoster {
   width: 150px;
@@ -196,6 +197,6 @@ h1 {
 
 
 .addToList:hover, .addToList:focus {
-  background-color: skyblue;
+  background-color: white;
   color: black;
 }

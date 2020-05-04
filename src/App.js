@@ -88,14 +88,10 @@ class App extends Component {
         
       },
     }).then((response) => {
-      // console.log("the response");
-      // console.log(response.data.results);
-      // console.log("end response")
       const theResponse = response;
       response.data.results.length === 0 ?
         this.setState({resultsMessage: "Sorry no results :("}) :
         this.resultsHandler(theResponse.data.results, movieDBURL, baseImageURL, userInput);
-        console.log("messagebeing SET: ", this.state.resultsMessage)
     });
   };
 
@@ -122,7 +118,6 @@ class App extends Component {
 
   addMovieHandler = (movieTitle, poster) => {
     const dbRef = firebase.database().ref();
-    console.log("clicked for a movie");
           const newMovie = {
             title: movieTitle,
             votes: 0,
@@ -149,7 +144,6 @@ class App extends Component {
 
 
   render() {
-    // console.log("resultsMessageBeinSent", this.resultsMessage);
     return (
       <div className="App">
         <header>
@@ -168,9 +162,7 @@ class App extends Component {
             >
               {this.state.results.map((movieResult, i) => {
                 const { image, title, votes } = movieResult;
-                {
-                  /* console.log("yo", movieResult);s */
-                }
+                
                 return (
                   <MovieResult
                     key={i}
