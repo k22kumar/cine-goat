@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/cine-goat/static/css/main.0506626b.chunk.css",
-    "main.js": "/cine-goat/static/js/main.af4af082.chunk.js",
-    "main.js.map": "/cine-goat/static/js/main.af4af082.chunk.js.map",
+    "main.css": "/cine-goat/static/css/main.93d33717.chunk.css",
+    "main.js": "/cine-goat/static/js/main.1cd39e60.chunk.js",
+    "main.js.map": "/cine-goat/static/js/main.1cd39e60.chunk.js.map",
     "runtime-main.js": "/cine-goat/static/js/runtime-main.51a35cb2.js",
     "runtime-main.js.map": "/cine-goat/static/js/runtime-main.51a35cb2.js.map",
     "static/js/2.462cbe2d.chunk.js": "/cine-goat/static/js/2.462cbe2d.chunk.js",
     "static/js/2.462cbe2d.chunk.js.map": "/cine-goat/static/js/2.462cbe2d.chunk.js.map",
     "index.html": "/cine-goat/index.html",
-    "precache-manifest.3231289b4072e688ef4c642253ff5d00.js": "/cine-goat/precache-manifest.3231289b4072e688ef4c642253ff5d00.js",
+    "precache-manifest.9c6bac3d87329363de6ee63055cf4d4c.js": "/cine-goat/precache-manifest.9c6bac3d87329363de6ee63055cf4d4c.js",
     "service-worker.js": "/cine-goat/service-worker.js",
-    "static/css/main.0506626b.chunk.css.map": "/cine-goat/static/css/main.0506626b.chunk.css.map",
+    "static/css/main.93d33717.chunk.css.map": "/cine-goat/static/css/main.93d33717.chunk.css.map",
     "static/js/2.462cbe2d.chunk.js.LICENSE.txt": "/cine-goat/static/js/2.462cbe2d.chunk.js.LICENSE.txt",
     "static/media/temp.jpg": "/cine-goat/static/media/temp.75e38e06.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.51a35cb2.js",
     "static/js/2.462cbe2d.chunk.js",
-    "static/css/main.0506626b.chunk.css",
-    "static/js/main.af4af082.chunk.js"
+    "static/css/main.93d33717.chunk.css",
+    "static/js/main.1cd39e60.chunk.js"
   ]
 }
