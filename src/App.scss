@@ -79,9 +79,10 @@ h1 {
 
 
 .movieOptionContainer {
+  width: 150px;
   display: flex;
   flex-direction: column;
-  width: 150px;
+  justify-content: space-between;
   margin: 10px;
   background-color: $votes;
   color: $voteFont;

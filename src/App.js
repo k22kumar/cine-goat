@@ -91,6 +91,7 @@ class App extends Component {
       params: {
         api_key: apiKey,
         query: userInput,
+        include_adult: false,
         page: 1
         
       },
