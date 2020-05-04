@@ -55,6 +55,11 @@ class App extends Component {
       // update the movie state array
       //we are storing the titles array in a seperate array so that we can check later using 
       // .includes if the movie is already an option 
+
+      //sort movies by votes
+
+      movieArray.sort((a, b) => b.votes - a.votes);
+
       this.setState({
         movieOptions: movieArray,
         movieOptionsTitles: titlesArray
