@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// this class is to show a potential movie result and show to screen
 class MovieResult extends Component {
   constructor() {
     super();

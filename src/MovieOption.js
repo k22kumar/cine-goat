@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import tempImg from "./assets/temp.jpg";
 import firebase from "./firebase";
 
+// this class represents the movie option you can vote for.
 class MovieOption extends Component {
 
   constructor() {
@@ -51,7 +52,6 @@ class MovieOption extends Component {
           </article>
         );
     }
-
 }
 
 export default MovieOption;

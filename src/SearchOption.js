@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // this component will handle adding a new movie option to the database
 
+// this class is to search for movie results
 class SearchOption extends Component {
   constructor() {
     super();

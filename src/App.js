@@ -10,7 +10,6 @@ import MovieResult from './MovieResult';
 
 //TO MARKER , I am having issues updating the search results LIVE when a movie is added to the movieOptions. It looks like my results array state is being updated when I add movies, but I dont understand why my new search results are not rendering new MovieResults when the results state is updated. 
 
-// Also why is it when search is focused, my gallery results seem to have its width shrunk for some reason?
 class App extends Component {
   constructor() {
     //put all the movie options in an array and map over them
@@ -43,7 +42,12 @@ class App extends Component {
         )
         titlesArray.push(data[key].title);
       }
-      // forEach ()
+
+      // if a search result is already in the movie options, then dont put it in search result
+
+
+      // someone reason it is NOT rendering , if you have time could you let me know ?
+
 
       if(this.state.results.length>0) {
         const newResults = this.state.results.filter((result) => {
@@ -68,8 +72,6 @@ class App extends Component {
   }
 
   // helper methods
-
-
   noInputHandler = () => this.setState({resultsMessage: "Type a movie to search!"});
 
   inputHandler = (userInput) => {
