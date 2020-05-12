@@ -49,12 +49,7 @@ class App extends Component {
       // someone reason it is NOT rendering , if you have time could you let me know ?
 
 
-      if(this.state.results.length>0) {
-        const newResults = this.state.results.filter((result) => {
-          return !this.state.movieOptionsTitles.includes(result.title);
-        })
-          this.setState({results: newResults});
-      }
+     
 
       // update the movie state array
       //we are storing the titles array in a seperate array so that we can check later using 
@@ -67,7 +62,16 @@ class App extends Component {
       this.setState({
         movieOptions: movieArray,
         movieOptionsTitles: titlesArray
-      })
+      }, () => {
+          if(this.state.results.length>0) {
+            const newResults = this.state.results.filter((result) => {
+              return !this.state.movieOptionsTitles.includes(result.title);
+            });
+            this.setState({ results: newResults });
+          }
+
+      }) 
+       
     });
   }
 
