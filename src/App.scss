@@ -180,10 +180,14 @@ h1 {
 .movieImg, .resultPoster {
   width: 100%;
     img {
-        
         margin: auto;
         }
       }
+      
+.movieImg {
+  display: block;
+  padding: 0;
+}
 
 .addToList {
   display: flex;

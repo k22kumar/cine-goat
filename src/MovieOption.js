@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import tempImg from "./assets/temp.jpg";
 import firebase from "./firebase";
 
 // this class represents the movie option you can vote for.
@@ -29,10 +28,12 @@ class MovieOption extends Component {
               <p className="votes">Votes: {this.props.votes}</p>
             <ul className="imgAndLikes">
               <li className="movieImg">
+                <button className="movieImg">
                 <img
                   src={this.props.image}
                   alt={"Movie poster for: " + this.props.movieTitle}
                 />
+              </button>
               </li>
               <li className="likeAndDislike">
                 <button

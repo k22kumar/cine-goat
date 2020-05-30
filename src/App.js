@@ -45,12 +45,6 @@ class App extends Component {
 
       // if a search result is already in the movie options, then dont put it in search result
 
-
-      // someone reason it is NOT rendering , if you have time could you let me know ?
-
-
-     
-
       // update the movie state array
       //we are storing the titles array in a seperate array so that we can check later using 
       // .includes if the movie is already an option 
