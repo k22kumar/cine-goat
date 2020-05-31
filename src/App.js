@@ -6,10 +6,7 @@ import firebase from "./firebase";
 import axios from "axios";
 import ResultScreen from "./ResultScreen";
 import MovieResult from './MovieResult';
-
-
-//TO MARKER , I am having issues updating the search results LIVE when a movie is added to the movieOptions. It looks like my results array state is being updated when I add movies, but I dont understand why my new search results are not rendering new MovieResults when the results state is updated. 
-
+import Swal from "sweetalert2";
 class App extends Component {
   constructor() {
     //put all the movie options in an array and map over them
@@ -18,7 +15,6 @@ class App extends Component {
       movieOptions: [],
       userInput: "enter a movie",
       showResults: false,
-      resultsMessage: "Type a movie to Search!",
       results: [],
       movieOptionTitles:[]
     };
@@ -104,13 +100,13 @@ class App extends Component {
   resultsHandler = (response, movieDBURL, baseImageURL, userInput) => {
     const movieResults =[]
 
-
     response.forEach((movie) => {
         if (!this.state.movieOptionsTitles.includes(movie.title) && movie.poster_path != null){
           const movieImg = `${baseImageURL}${movie.poster_path}`;
           const newMovie = {
             title: movie.title,
-            image: movieImg
+            image: movieImg,
+            description: movie.overview
           };
           movieResults.push(newMovie);
         }
@@ -118,8 +114,6 @@ class App extends Component {
     this.setState({ results: movieResults });
 
   }
-
-  noResultsToShow = () => {this.setState({resultsMessage: "Sorry, no matches :("})};
 
 
   addMovieHandler = (movieTitle, poster) => {
@@ -147,6 +141,14 @@ class App extends Component {
     });
   }
 
+  //this function displays an alert with the title of the movie clicked and a description about the movie
+  infoHandler = (title, description) => {
+    Swal.fire({
+      title: title,
+      text: description
+    })
+  }
+
 
 
   render() {
@@ -167,7 +169,7 @@ class App extends Component {
               showResultsHandler={this.showResultsHandler}
             >
               {this.state.results.map((movieResult, i) => {
-                const { image, title, votes } = movieResult;
+                const { image, title, votes, description} = movieResult;
                 
                 return (
                   <MovieResult
@@ -175,7 +177,9 @@ class App extends Component {
                     title={title}
                     votes={votes}
                     image={image}
+                    description={description}
                     addMovieHandler={this.addMovieHandler}
+                    infoHandler={this.infoHandler}
                   />
                 );
               })}
@@ -194,6 +198,7 @@ class App extends Component {
                   image={image}
                   votes={votes}
                   voteHandler={this.voteHandler}
+                  infoHandler={this.infoHandler}
                 />
               );
             })}

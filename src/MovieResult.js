@@ -9,12 +9,17 @@ class MovieResult extends Component {
   // defered function to pass movie titles from input to main App
   deferedAddMovie = (e) => this.props.addMovieHandler(this.props.title, this.props.image);
 
+  deferredInfo = (title, description) => {
+    this.props.infoHandler(title, description);
+  }
+
   render() {
     return (
       <li className="movieResult">
-        <div className="resultPoster">
+        <button className="resultPoster"
+          onClick={() => this.deferredInfo(this.props.title, this.props.description)}>
           <img src={this.props.image} alt={this.props.title} />
-        </div>
+        </button>
         <button
           aria-label="Click here to add a movie option"
           onClick={this.deferedAddMovie}

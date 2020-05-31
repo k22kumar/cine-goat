@@ -38,7 +38,7 @@ class SearchOption extends Component {
           placeholder="Search for a movie"
         />
         <p>
-          <i class="fas fa-search"></i>
+          <i className="fas fa-search"></i>
         </p>
       </div>
     );

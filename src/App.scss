@@ -179,15 +179,12 @@ h1 {
 
 .movieImg, .resultPoster {
   width: 100%;
+  display: block;
+  padding: 0;
     img {
         margin: auto;
         }
       }
-      
-.movieImg {
-  display: block;
-  padding: 0;
-}
 
 .addToList {
   display: flex;

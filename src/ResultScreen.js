@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MovieResult from './MovieResult.js';
 
 // this class is to hold movie results and display to screen
 class ResultScreen extends Component {
