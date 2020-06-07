@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import firebase from "./firebase";
 
 // this class represents the movie option you can vote for.
 class MovieOption extends Component {
@@ -9,7 +8,7 @@ class MovieOption extends Component {
 
     this.state = {
       likePressed: false,
-      dislikePressed: false
+      dislikePressed: false,
     };
   }
 
@@ -21,6 +20,9 @@ class MovieOption extends Component {
     this.props.voteHandler(e, key, -1);
   }
 
+  deferredInfo = (title, description, image) => {
+    this.props.infoHandler(title, description, image);
+  }
 
     render() {
         return (
@@ -28,7 +30,9 @@ class MovieOption extends Component {
               <p className="votes">Votes: {this.props.votes}</p>
             <ul className="imgAndLikes">
               <li className="movieImg">
-                <button className="movieImg">
+                <button className="movieImg"
+                  onClick={() => this.deferredInfo(this.props.movieTitle, this.props.description, this.props.image)}>
+                  <div className="viewInfo"><p>View Info</p></div>
                 <img
                   src={this.props.image}
                   alt={"Movie poster for: " + this.props.movieTitle}
