@@ -20,8 +20,8 @@ class MovieOption extends Component {
     this.props.voteHandler(e, key, -1);
   }
 
-  deferredInfo = (title,description) => {
-    this.props.infoHandler(title,description);
+  deferredInfo = (title, description, image) => {
+    this.props.infoHandler(title, description, image);
   }
 
     render() {
@@ -31,7 +31,8 @@ class MovieOption extends Component {
             <ul className="imgAndLikes">
               <li className="movieImg">
                 <button className="movieImg"
-                  onClick={() => this.deferredInfo(this.props.movieTitle, this.props.description)}>
+                  onClick={() => this.deferredInfo(this.props.movieTitle, this.props.description, this.props.image)}>
+                  <div className="viewInfo"><p>View Info</p></div>
                 <img
                   src={this.props.image}
                   alt={"Movie poster for: " + this.props.movieTitle}

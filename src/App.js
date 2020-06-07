@@ -33,7 +33,8 @@ class App extends Component {
             movieTitle: data[key].title,
             movieID: key,
             image: data[key].image,
-            votes: data[key].votes
+            votes: data[key].votes,
+            description: data[key].description
           }
         )
         titlesArray.push(data[key].title);
@@ -46,7 +47,6 @@ class App extends Component {
       // .includes if the movie is already an option 
 
       //sort movies by votes
-
       movieArray.sort((a, b) => b.votes - a.votes);
 
       this.setState({
@@ -59,9 +59,7 @@ class App extends Component {
             });
             this.setState({ results: newResults });
           }
-
       }) 
-       
     });
   }
 
@@ -87,7 +85,6 @@ class App extends Component {
         query: userInput,
         include_adult: false,
         page: 1
-        
       },
     }).then((response) => {
       const theResponse = response;
@@ -112,16 +109,15 @@ class App extends Component {
         }
     });
     this.setState({ results: movieResults });
-
   }
 
-
-  addMovieHandler = (movieTitle, poster) => {
+  addMovieHandler = (movieTitle, poster, description) => {
     const dbRef = firebase.database().ref();
           const newMovie = {
             title: movieTitle,
             votes: 0,
             image: poster,
+            description: description
           };
           dbRef.push(newMovie);
   }
@@ -142,10 +138,22 @@ class App extends Component {
   }
 
   //this function displays an alert with the title of the movie clicked and a description about the movie
-  infoHandler = (title, description) => {
+  infoHandler = (title, description, image) => {
     Swal.fire({
-      title: title,
-      text: description
+      title: `<span class="sweetAlertTitle"> ${title} </span>`,
+      html: `<p class="overview">${description}</p>`,
+      background: `rgba(0, 0, 0, 0.55)`,
+      color: `white`,
+      backdrop: `
+      rgba(66, 99, 170, 0.3)
+      url(${image})
+      center
+      no-repeat
+      `,
+      buttons: {
+        confirm : {className: 'sweetAlertTwo'}
+      },
+      buttonsStyling: false
     })
   }
 
@@ -157,6 +165,7 @@ class App extends Component {
         <header>
         <h1 className="mainTitle">cinegoat</h1>
         <p className="description">An app that tracks the best movie!</p>
+          <p className="description">Tap on a movie to learn more!</p>
           <SearchOption
             showResultsHandler={this.showResultsHandler}
             noInputHandler={this.noInputHandler}
@@ -189,7 +198,7 @@ class App extends Component {
         <main>
           <ul className="movieGallery">
             {this.state.movieOptions.map((movie, i) => {
-              const { movieID, movieTitle, votes, image } = movie;
+              const { movieID, movieTitle, votes, image, description } = movie;
               return (
                 <MovieOption
                   key={i}
@@ -197,6 +206,7 @@ class App extends Component {
                   movieTitle={movieTitle}
                   image={image}
                   votes={votes}
+                  description={description}
                   voteHandler={this.voteHandler}
                   infoHandler={this.infoHandler}
                 />
