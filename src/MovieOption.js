@@ -5,7 +5,6 @@ class MovieOption extends Component {
 
   constructor() {
     super();
-
     this.state = {
       likePressed: false,
       dislikePressed: false,
